@@ -54,6 +54,6 @@ different between Docker and VM?
 	-------------------
 	     Hardware
 
-  => d 
+  => dd 
 
 
