@@ -54,6 +54,12 @@ different between Docker and VM?
 	-------------------
 	     Hardware
 
-  => dd 
+ Differench Image and Container
+  => Container is a running environment for IMAGE
+   -> virtual file system
+   -> port binded: talk to application running inside of container
+   -> application image : postgres, redis, mongo ...
+
+  
 
 
