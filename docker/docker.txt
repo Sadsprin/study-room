@@ -1,0 +1,59 @@
+
+where do container live?
+	=> Container Repository
+	=> Private repositories
+
+Before container
+  =>  installation process diffrent on each OS environment
+  =>  Many steps where something could go wrong
+
+  =>  많은 개발자가 한 프로그램을 개발할 때 로컬 개발 환경은 다르다. 개발 환경이 다름으로 인해 많은 문제가 생길 수 있다. 또한 환경을 일관성있게 구성하기 위하여 시간을 많이 할애해야한다.
+
+  =>  많은 회사에서 이러한 프로그램을 관리하기 위해 개발자와 운영팀을 따로 두었다. 개발자는 프로그램을 개발하고 운영팀은 많은 설정과 외부 의존성을 관리해야만 했다. 이러한 과정 속에서 프로그램에 충돌이 생겨났고 관리하기 더욱 어려워졌다.
+
+after container
+  =>  own isolated environment
+  =>  packaged with all needed configuration 
+  =>  one command to install the app
+  =>  run same app with 2 diffrent versions
+
+  =>  container를 사용하면 독자적인 환경을 제공해준다. 만약 내가 다른 로컬 환경에서 개발할지라도 일관성있는 환경을 유지할 수 있다. 또한 하나의 커맨드로 앱 설치 및 실행이 가능하며 같은 앱의 다른 버전 또한 실행할 수 있다.
+
+  => 환경을 일관성있게 생성함으로써 운영팀과 개발팀을 따로 둘 이유가 없어졌다.
+
+
+What is Container?
+  => Layer of images
+  => Mostly Linux Base Image, because small in size
+  => Application image on top
+
+how Docker operating?
+  => operating system have 2 Layer
+
+	Application - 2 layer
+	OS Kernel   - 1 layer
+	Hardware    
+
+different between Docker and VM?
+  => Docker is using host's OS Kernel but VM have own OS Kernel
+  => Docker image much smaller(MB), but VM is much bigger(GB) 
+              Docker 
+	-------------------
+	|   application   |
+        -------------------
+             OS Kernel
+
+	     Hardware
+
+
+		VM
+        -------------------
+	|   application   |
+
+        |    OS Kernel    |
+	-------------------
+	     Hardware
+
+  =>  
+
+
