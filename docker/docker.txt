@@ -54,12 +54,29 @@ different between Docker and VM?
 	-------------------
 	     Hardware
 
- Differench Image and Container
+Differench Image and Container
   => Container is a running environment for IMAGE
    -> virtual file system
    -> port binded: talk to application running inside of container
    -> application image : postgres, redis, mongo ...
 
-111  
+Container Port vs HOST Port
+  => Multiple container can run on your host machine
+  => Conflict when same port on host machine
+
+  => container안의 포트는 다른 container의 포트와는 다른 기기로 취급 되므로 같아도 되나, bind 되는 HOST의 포트는 중복되어서는 안된다.
+
+
+Docker basic command
+  => docker run -> pull image and run container
+  => docker image -> show images that host have
+  => docker ps -> show container that is running
+  => docker exec -> it can use terminal that docker container is running
+  => docker pull -> pull images
+  => docker stop -> stop container that is running
+  => docker restart -> restart docker if configuration is changed or error causes
+  => docker start -> start container that is stopping
+
+   
 
 
