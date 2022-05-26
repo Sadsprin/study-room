@@ -1,6 +1,5 @@
 const express = require('express');
-const redis = require('redis');
-const session = require('express-session');
+
 
 const dbConnectWithRetry = require('./config/dbconfig')
 const postRouter = require('./routes/postRouter')
@@ -11,13 +10,22 @@ const app = express();
 
 const port = process.env.PORT || 3000
 
-let redisStore = require('connect-redis')(session);
 
+
+
+const redis = require('redis');
+const session = require('express-session');
+let redisStore = require('connect-redis')(session);
 let redisClient = redis.createClient({
-    host: REDIS_URL,
-    port: REDIS_PORT,
-    legacyMode: true
-})
+    legacyMode: true,
+    socket: {
+        port: REDIS_PORT,
+        host: REDIS_URL
+    }
+});
+redisClient.on('error', err => {console.log('Error ' + err);});
+
+redisClient.connect().catch(err => console.error(err))
 
 app.use(session({
     store: new redisStore({client: redisClient}),
@@ -27,17 +35,9 @@ app.use(session({
         resave: false,
         httpOnly: true,
         saveUninitialized: false,
-        maxAge: 30000,
+        maxAge: 3000000,
     }
 }));
-
-
-redisClient.connect().catch(e => console.error(e));
-
-
-
-redisClient.on('connect', () => console.log('Connected to Redis'))
-
 
 
 dbConnectWithRetry();

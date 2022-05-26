@@ -7,8 +7,10 @@ services:
     env_file:
       - ./.env
     depends_on:
+      - redis-app
       - mongo
-      - redis
+    networks:
+      - my_app_network
   mongo:
     image: mongo:4.4.14
     volumes:
@@ -16,9 +18,16 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=mongo
       - MONGO_INITDB_ROOT_PASSWORD=password
-  redis:
-    image: redis:5.0.14
+    networks:
+      - my_app_network
+  redis-app:
+    image: redis
+    networks:
+      - my_app_network
 volumes:
   mongo_volume: 
+networks:
+  my_app_network:
+    driver: bridge
 
     
