@@ -1,6 +1,5 @@
 const express = require('express');
 
-
 const dbConnectWithRetry = require('./config/dbconfig')
 const postRouter = require('./routes/postRouter')
 const userRouter = require('./routes/userRouter');
@@ -9,9 +8,6 @@ const { REDIS_URL, REDIS_PORT, SESSION_SECRET } = require('./config/config');
 const app = express();
 
 const port = process.env.PORT || 3000
-
-
-
 
 const redis = require('redis');
 const session = require('express-session');
@@ -39,17 +35,12 @@ app.use(session({
     }
 }));
 
-
 dbConnectWithRetry();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-
-
-app.get('/', (req, res) => {    
-    console.log(req.body)
-
+app.get('/', (req, res) => {
     res.send("hello world");
 })
 

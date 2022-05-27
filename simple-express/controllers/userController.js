@@ -42,6 +42,7 @@ exports.login = async (req, res, next) => {
         const isCorrect = await bcrypt.compare(password, user.password);
 
         if(isCorrect) {
+						req.session.user = user;
             res.status(200).json({
                 status: 'success',
             })
@@ -58,4 +59,20 @@ exports.login = async (req, res, next) => {
             error,
         })
     }
+}
+
+exports.logout = async (req, res, next) => {
+	if(req?.session?.user) {
+		req.session.destroy()
+		res.status(201).json({
+			status: 'success',
+			message: 'successfully logged out',
+		});
+	} else {
+		res.status(400).json({
+			status: 'fail',
+			message: 'not logged in',
+		})
+	}
+
 }
