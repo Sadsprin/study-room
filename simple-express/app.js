@@ -1,4 +1,7 @@
 const express = require('express');
+const cors = require('cors');
+const redis = require('redis');
+const session = require('express-session');
 
 const dbConnectWithRetry = require('./config/dbconfig')
 const postRouter = require('./routes/postRouter')
@@ -9,8 +12,6 @@ const app = express();
 
 const port = process.env.PORT || 3000
 
-const redis = require('redis');
-const session = require('express-session');
 let redisStore = require('connect-redis')(session);
 let redisClient = redis.createClient({
     legacyMode: true,
@@ -24,7 +25,7 @@ redisClient.on('error', err => {console.log('Error ' + err);});
 redisClient.connect().catch(err => console.error(err))
 
 app.use(session({
-    store: new redisStore({client: redisClient}),
+    store: new redisStore({client: redisClient}), 
     secret: SESSION_SECRET,
     cookie: {
         secure: false,
@@ -37,11 +38,14 @@ app.use(session({
 
 dbConnectWithRetry();
 
+app.enable("trust proxy");
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
     res.send("hello world");
+		console.log("yeah it ran",req.headers['x-real-ip']|| req.ips || req.socket.remoteAddress);
 })
 
 app.use('/api/v1/posts', postRouter)

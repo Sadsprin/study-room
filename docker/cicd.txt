@@ -1,0 +1,11 @@
+
+CI/CD
+	=> CI : Continuous Integration 
+	=> CD : Continuous Delivery or Deployment
+
+CI
+	1. 코드 변경사항을 주기적으로 빈번하게 머지해야 한다.
+	2. 통합을 위한 단계 (빌드, 테스트, 머지)의 자동화
+
+CD
+	1. 자동 배포
